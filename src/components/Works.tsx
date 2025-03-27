@@ -25,7 +25,7 @@ const Works = () => {
             <div className="bg-[#242938] rounded-lg p-4 flex items-start">
               <div className="mr-4">
                 <div className="bg-white p-1 rounded">
-                  <img src="https://via.placeholder.com/30" alt="Boissons" className="w-8 h-8" />
+                  <img src="https://dhg1h5j42swfq.cloudfront.net/2015/11/03232602/TRE-SE.png" alt="Boissons" className="w-8 h-8" />
                 </div>
               </div>
               <div>
@@ -75,29 +75,28 @@ const Works = () => {
         {/* Projects Column */}
         <div>
           <h3 className="text-sm text-gray-400 mb-4">
-            Latest side/freelance project.
+            Projetos Pessoais
           </h3>
           <div className="space-y-4">
             <div className="bg-[#242938] rounded-lg p-4">
               <div className="flex items-center mb-2">
                 <div className="bg-blue-600 p-2 rounded mr-3">
-                  <span className="text-white text-lg">H</span>
+                <img src="https://avatars.githubusercontent.com/u/201299892?s=48&v=4" alt="Projeto IGNIS" className="w-8 h-8" />
                 </div>
-                <h4 className="font-medium">HMS</h4>
+                <h4 className="font-medium">Projeto IGNIS</h4>
               </div>
               <p className="text-sm text-gray-400 mb-2">
-                Hospital management application.
+                Grupo de estudos focado em simulador fluxo de trabalho real do mercado de trabalho.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="bg-gray-700 text-xs py-1 px-2 rounded">
-                  React
-                </span>
-                <span className="bg-gray-700 text-xs py-1 px-2 rounded">
-                  Spring Boot
-                </span>
-                <span className="bg-gray-700 text-xs py-1 px-2 rounded">
-                  Docker
-                </span>
+                <a 
+                  href="https://github.com/Projeto-IGNIS/todoList" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="bg-gray-700 text-xs py-1 px-2 rounded"
+                >
+                  To-do List
+                </a>
               </div>
             </div>
             <div className="bg-[#242938] rounded-lg p-4">
