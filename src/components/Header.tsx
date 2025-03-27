@@ -1,26 +1,24 @@
-import { LinkedinIcon, TwitterIcon, MoonIcon } from 'lucide-react';
+import { LinkedinIcon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
+
 const Header = () => {
-  return <header className="py-4 flex justify-between items-center">
+  return (
+    <header className="py-4 flex justify-between items-center">
       <div>
         <button className="text-blue-400 font-semibold text-xl" aria-label="Home">
           ViniDias
         </button>
       </div>
       <div className="flex items-center space-x-4">
-        <a href="#" aria-label="LinkedIn" className="text-gray-400 hover:text-gray-200">
+        <a href="https://www.linkedin.com/in/vinidias1" aria-label="LinkedIn" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
           <LinkedinIcon size={18} />
         </a>
-        <a href="#" aria-label="Twitter" className="text-gray-400 hover:text-gray-200">
-          <TwitterIcon size={18} />
-        <a href="#" aria-label="GitHub" className="text-gray-400 hover:text-gray-200">
+        <a href="https://github.com/ViniDias1" aria-label="GitHub" className="text-gray-400 hover:text-white transition-colors duration-200">
           <SiGithub size={18} />
         </a>
-        </a>
-        <button aria-label="Toggle theme" className="text-gray-400 hover:text-gray-200 ml-2">
-          <MoonIcon size={18} />
-        </button>
       </div>
-    </header>;
+    </header>
+  );
 };
+
 export default Header;
