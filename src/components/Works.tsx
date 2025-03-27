@@ -99,7 +99,7 @@ const Works = () => {
                 </a>
               </div>
             </div>
-            <div className="bg-[#242938] rounded-lg p-4">
+            {/* <div className="bg-[#242938] rounded-lg p-4">
               <div className="flex items-center mb-2">
                 <div className="bg-blue-600 p-2 rounded mr-3">
                   <span className="text-white text-lg">S</span>
@@ -145,7 +145,7 @@ const Works = () => {
                   Mongo
                 </span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
