@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 const Skills = () => {
-  const [activeTab, setActiveTab] = useState('frontend');
+  const [activeTab, setActiveTab] = useState('backend');
   return <section className="py-16" id="skills">
       <h2 className="text-3xl font-bold mb-4">Skills</h2>
       <p className="text-gray-400 mb-8">
-        Tools and technologies I enjoy working with
+        Linguagens e Ferramentas que utilizo no meu dia a dia.
       </p>
       <div className="bg-[#242938] rounded-lg overflow-hidden">
         {/* Tabs */}
         <div className="flex border-b border-gray-700">
-          <button className={`py-2 px-6 ${activeTab === 'frontend' ? 'border-b-2 border-blue-500' : ''}`} onClick={() => setActiveTab('frontend')}>
+          {/* <button className={`py-2 px-6 ${activeTab === 'frontend' ? 'border-b-2 border-blue-500' : ''}`} onClick={() => setActiveTab('frontend')}>
             Frontend
-          </button>
+          </button> */}
           <button className={`py-2 px-6 ${activeTab === 'backend' ? 'border-b-2 border-blue-500' : ''}`} onClick={() => setActiveTab('backend')}>
-            Backend
+            Tecnologias mais usadas
           </button>
-          <button className={`py-2 px-6 ${activeTab === 'others' ? 'border-b-2 border-blue-500' : ''}`} onClick={() => setActiveTab('others')}>
-            Others
+          <button className={`py-2 px-6 ${activeTab === 'ferramentas' ? 'border-b-2 border-blue-500' : ''}`} onClick={() => setActiveTab('ferramentas')}>
+            Ferramentas
           </button>
         </div>
         {/* Tab Content */}
         <div className="p-6">
-          {activeTab === 'frontend' && <div className="grid md:grid-cols-3 gap-6">
+          {/* {activeTab === 'frontend' && <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-[#1a1f2e] p-6 rounded-lg">
                 <div className="flex justify-center mb-4">
                   <div className="text-cyan-500">
@@ -70,13 +70,168 @@ const Skills = () => {
                   native-like user experience.
                 </p>
               </div>
-            </div>}
-          {activeTab === 'backend' && <div className="p-6 text-center text-gray-400">
-              Backend technologies content would go here
-            </div>}
-          {activeTab === 'others' && <div className="p-6 text-center text-gray-400">
-              Other technologies content would go here
-            </div>}
+            </div>} */}
+          {activeTab === 'backend' && (
+            <div className="space-y-6">
+              {/* Languages */}
+              <div className="grid md:grid-cols-5 gap-6 bg-[#1c202f] p-6 rounded-lg">
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="40" width="100" alt="Java logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">Java</h3>
+                  <p className="text-sm text-gray-400 text-center">Robust and versatile programming language for backend development.</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40" width="100" alt="Python logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">Python</h3>
+                  <p className="text-sm text-gray-400 text-center">Ideal for building scalable and efficient backend systems.</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" width="100" alt="JavaScript logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">JavaScript</h3>
+                  <p className="text-sm text-gray-400 text-center">Widely used for server-side development with Node.js.</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="40" width="100" alt="TypeScript logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">TypeScript</h3>
+                  <p className="text-sm text-gray-400 text-center">Widely used for server-side development with TypeScript.</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="40" width="100" alt="TypeScript logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">Node.js</h3>
+                  <p className="text-sm text-gray-400 text-center">Widely used for server-side development with TypeScript.</p>
+                </div>
+              </div>
+              {/* Frameworks */}
+              <div className="grid md:grid-cols-4 gap-6 bg-[#1c202f] p-6 rounded-lg">
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                    <div className="flex justify-center mb-4">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" height="40" width="100" alt="Spring logo" />
+                    </div>
+                    <h3 className="text-xl font-medium text-center mb-2">Spring</h3>
+                    <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/junit/junit-original.svg" height="40" width="100" alt="TypeScript logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">JUnit</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg" height="40" width="100" alt="Spring logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">Angular</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" width="100" alt="React logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">React</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+                
+              </div>
+              {/* Databases */}
+              <div className="grid md:grid-cols-3 gap-6 bg-[#1d2131] p-6 rounded-lg">
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" height="40" width="100" alt="MySQL logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">MySQL</h3>
+                  <p className="text-sm text-gray-400 text-center">Reliable relational database management system.</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="40" width="100" alt="PostgreSQL logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">PostgreSQL</h3>
+                  <p className="text-sm text-gray-400 text-center">Advanced open-source relational database system.</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" height="40" width="100" alt="oracle logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">Oracle</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+              </div>
+            </div>
+          )}
+          {activeTab === 'ferramentas' && (
+            <div className="space-y-6">
+              {/* Languages */}
+              <div className="grid md:grid-cols-4 gap-6 bg-[#1c202f] p-6 rounded-lg">
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="40" width="100" alt="Doker logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">Docker</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" height="40" width="100" alt="Postman logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">Postman</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="40" width="100" alt="Git logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">Git</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="40" width="100" alt="Visual Studio Code logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">Visual Studio Code</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+              </div>
+
+              {/* Ota linha */}
+              <div className="grid md:grid-cols-4 gap-6 bg-[#1c202f] p-6 rounded-lg">
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" height="40" width="100" alt="GitLab logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">GitLab</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="40" width="100" alt="GitHub logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">GitHub</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+                <div className="bg-[#1a1f2e] p-6 rounded-lg">
+                  <div className="flex justify-center mb-4">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swagger/swagger-original.svg" height="40" width="100" alt="TypeScript logo" />
+                  </div>
+                  <h3 className="text-xl font-medium text-center mb-2">Swagger</h3>
+                  <p className="text-sm text-gray-400 text-center">TEXTO</p>
+                </div>
+              </div>
+              {/* Ota linha */}
+
+            </div>
+          )}
+
         </div>
       </div>
     </section>;
