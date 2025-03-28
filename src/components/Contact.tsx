@@ -1,4 +1,4 @@
-import { LinkedinIcon, MailIcon, MessageCircleIcon, InstagramIcon } from 'lucide-react';
+import { LinkedinIcon, MailIcon } from 'lucide-react';
 
 const Contact = () => {
   return <section className="py-16" id="contact">
