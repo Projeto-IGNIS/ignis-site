@@ -80,7 +80,7 @@ const Works = () => {
           <div className="space-y-4">
             <div className="bg-[#242938] rounded-lg p-4">
               <div className="flex items-center mb-2">
-                <div className="bg-blue-600 p-2 rounded mr-3">
+                <div className="bg-white p-1 rounded mr-3">
                 <img src="https://avatars.githubusercontent.com/u/201299892?s=48&v=4" alt="Projeto IGNIS" className="w-8 h-8" />
                 </div>
                 <h4 className="font-medium">Projeto IGNIS</h4>
