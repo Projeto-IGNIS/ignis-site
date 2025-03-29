@@ -56,44 +56,63 @@ const Skills = () => {
 
   const useSmoothCarousel = (itemsLength: number, direction: 'left' | 'right') => {
     const [translateX, setTranslateX] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [dragOffset, setDragOffset] = useState(0);
 
     useEffect(() => {
-      const interval = setInterval(() => {
-        setTranslateX((prev) => {
-          const newTranslateX =
-            direction === 'left'
-              ? prev - 1
-              : prev + 1;
+      if (!isDragging) {
+        const interval = setInterval(() => {
+          setTranslateX((prev) => {
+            const newTranslateX =
+              direction === 'left'
+                ? prev - 1
+                : prev + 1;
 
-          return newTranslateX <= -itemsLength * 150
-            ? 0
-            : (() => {
-                if (newTranslateX >= 0) {
-                  return -itemsLength * 150;
-                }
-                return newTranslateX;
-              })();
-        });
-      }, 20); // Adjust speed
-      return () => clearInterval(interval);
-    }, [itemsLength, direction]);
+            return newTranslateX <= -itemsLength * 150
+              ? 0
+              : newTranslateX >= 0
+              ? -itemsLength * 150
+              : newTranslateX;
+          });
+        }, 20); // Adjust speed
+        return () => clearInterval(interval);
+      }
+    }, [itemsLength, direction, isDragging]);
 
-    return { translateX };
+    const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
+      e.preventDefault(); // Prevent text/image selection
+      setIsDragging(true);
+      setStartX('touches' in e ? e.touches[0].clientX : e.clientX);
+    };
+
+    const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
+      if (isDragging) {
+        const currentX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+        setDragOffset(currentX - startX);
+      }
+    };
+
+    const handleDragEnd = () => {
+      setIsDragging(false);
+      setTranslateX((prev) => prev + dragOffset);
+      setDragOffset(0);
+    };
+
+    return { translateX, handleDragStart, handleDragMove, handleDragEnd, dragOffset };
   };
 
   const backendCarousel = useSmoothCarousel(items.backend.length, 'left');
-  const basicCarousel = useSmoothCarousel(basicSkills.length, 'left'); // Changed direction to 'left'
+  const basicCarousel = useSmoothCarousel(basicSkills.length, 'left');
   const learningCarousel = useSmoothCarousel(learningSkills.length, 'left');
 
-  const renderCarousel = (type: 'backend' | 'basic' | 'learning', isPreview: boolean) => {
+  const renderCarousel = (type: 'backend' | 'basic' | 'learning', carousel: ReturnType<typeof useSmoothCarousel>, isPreview: boolean) => {
     const data =
       type === 'backend'
         ? items.backend.concat(items.backend)
         : type === 'basic'
         ? basicSkills.concat(basicSkills)
         : learningSkills.concat(learningSkills);
-
-    const carousel = type === 'backend' ? backendCarousel : type === 'basic' ? basicCarousel : learningCarousel;
 
     const panelText =
       type === 'backend'
@@ -103,14 +122,23 @@ const Skills = () => {
         : { title: 'Quero aprender', description: 'Tecnologias que desejo aprender no futuro.' };
 
     return (
-      <div className="p-6 relative overflow-hidden transition-all">
+      <div
+        className="p-6 relative overflow-hidden transition-all select-none" // Prevent text selection
+        onMouseDown={carousel.handleDragStart}
+        onMouseMove={carousel.handleDragMove}
+        onMouseUp={carousel.handleDragEnd}
+        onMouseLeave={carousel.handleDragEnd}
+        onTouchStart={carousel.handleDragStart}
+        onTouchMove={carousel.handleDragMove}
+        onTouchEnd={carousel.handleDragEnd}
+      >
         <div className="text-center mb-4">
           <h3 className="text-xl font-bold text-white">{panelText.title}</h3>
           <p className="text-gray-300">{panelText.description}</p>
         </div>
         <div
           className={`flex items-center space-x-4 ${isPreview ? 'opacity-50 scale-90' : 'opacity-100 scale-100'}`}
-          style={{ transform: `translateX(${carousel.translateX}px)` }}
+          style={{ transform: `translateX(${carousel.translateX + carousel.dragOffset}px)` }}
         >
           {data.map((item, index) => (
             <motion.div
@@ -157,7 +185,7 @@ const Skills = () => {
           animate={{ scale: activePanel === 'backend' ? 1.05 : 1 }}
           transition={{ type: 'spring', stiffness: 150, damping: 20 }}
         >
-          {renderCarousel('backend', activePanel !== 'backend')}
+          {renderCarousel('backend', backendCarousel, activePanel !== 'backend')}
         </motion.div>
 
         {/* Sei o básico */}
@@ -168,7 +196,7 @@ const Skills = () => {
           animate={{ scale: activePanel === 'basic' ? 1.05 : 1 }}
           transition={{ type: 'spring', stiffness: 150, damping: 20 }}
         >
-          {renderCarousel('basic', activePanel !== 'basic')}
+          {renderCarousel('basic', basicCarousel, activePanel !== 'basic')}
         </motion.div>
 
         {/* Quero aprender */}
@@ -179,7 +207,7 @@ const Skills = () => {
           animate={{ scale: activePanel === 'learning' ? 1.05 : 1 }}
           transition={{ type: 'spring', stiffness: 150, damping: 20 }}
         >
-          {renderCarousel('learning', activePanel !== 'learning')}
+          {renderCarousel('learning', learningCarousel, activePanel !== 'learning')}
         </motion.div>
       </div>
     </section>
