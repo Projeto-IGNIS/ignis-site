@@ -2,12 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const Skills = () => {
-  const [activeTab, setActiveTab] = useState<keyof typeof items>('backend');
-  const [backendIndex, setBackendIndex] = useState(0);
-  const [basicIndex, setBasicIndex] = useState(0);
-  const [learningIndex, setLearningIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
+  const [activePanel, setActivePanel] = useState<null | 'backend' | 'basic' | 'learning'>(null);
 
   const items = {
     backend: [
@@ -59,194 +54,133 @@ const Skills = () => {
     { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
   ];
 
-  const useCarousel = (itemsLength: number, setIndex: React.Dispatch<React.SetStateAction<number>>) => {
+  const useSmoothCarousel = (itemsLength: number, direction: 'left' | 'right') => {
+    const [translateX, setTranslateX] = useState(0);
+
     useEffect(() => {
       const interval = setInterval(() => {
-        if (!isDragging) {
-          updateIndex();
-        }
-      }, 4000);
+        setTranslateX((prev) => {
+          const newTranslateX =
+            direction === 'left'
+              ? prev - 1
+              : prev + 1;
+
+          return newTranslateX <= -itemsLength * 150
+            ? 0
+            : (() => {
+                if (newTranslateX >= 0) {
+                  return -itemsLength * 150;
+                }
+                return newTranslateX;
+              })();
+        });
+      }, 20); // Adjust speed
       return () => clearInterval(interval);
-    }, [itemsLength, isDragging, setIndex]);
+    }, [itemsLength, direction]);
 
-    const updateIndex = () => {
-      setIndex((prevIndex) => (prevIndex + 1) % itemsLength);
-    };
-
-    const handleManualNavigation = (direction: 'prev' | 'next') => {
-      setIndex((prevIndex) => {
-        return direction === 'prev'
-          ? (prevIndex - 1 + itemsLength) % itemsLength
-          : (prevIndex + 1) % itemsLength;
-      });
-    };
-
-    return { handleManualNavigation };
+    return { translateX };
   };
 
-  const backendCarousel = useCarousel(items[activeTab].length, setBackendIndex);
-  const basicCarousel = useCarousel(basicSkills.length, setBasicIndex);
-  const learningCarousel = useCarousel(learningSkills.length, setLearningIndex);
+  const backendCarousel = useSmoothCarousel(items.backend.length, 'left');
+  const basicCarousel = useSmoothCarousel(basicSkills.length, 'left'); // Changed direction to 'left'
+  const learningCarousel = useSmoothCarousel(learningSkills.length, 'left');
 
-  const handleDragStart = (e: React.TouchEvent | React.MouseEvent) => {
-    setIsDragging(true);
-    setStartX('touches' in e ? e.touches[0].clientX : e.clientX);
-  };
+  const renderCarousel = (type: 'backend' | 'basic' | 'learning', isPreview: boolean) => {
+    const data =
+      type === 'backend'
+        ? items.backend.concat(items.backend)
+        : type === 'basic'
+        ? basicSkills.concat(basicSkills)
+        : learningSkills.concat(learningSkills);
 
-  const handleDragEnd = (e: React.TouchEvent | React.MouseEvent, handleManualNavigation: (direction: 'prev' | 'next') => void) => {
-    setIsDragging(false);
-    const endX = 'changedTouches' in e ? e.changedTouches[0].clientX : e.clientX;
-    if (startX - endX > 50) {
-      handleManualNavigation('next');
-    } else if (endX - startX > 50) {
-      handleManualNavigation('prev');
-    }
+    const carousel = type === 'backend' ? backendCarousel : type === 'basic' ? basicCarousel : learningCarousel;
+
+    const panelText =
+      type === 'backend'
+        ? { title: 'Tecnologias e Ferramentas', description: 'As tecnologias e ferramentas que mais utilizo no meu dia a dia.' }
+        : type === 'basic'
+        ? { title: 'Sei o básico', description: 'Tecnologias que já usei e possuo conhecimento básico.' }
+        : { title: 'Quero aprender', description: 'Tecnologias que desejo aprender no futuro.' };
+
+    return (
+      <div className="p-6 relative overflow-hidden transition-all">
+        <div className="text-center mb-4">
+          <h3 className="text-xl font-bold text-white">{panelText.title}</h3>
+          <p className="text-gray-300">{panelText.description}</p>
+        </div>
+        <div
+          className={`flex items-center space-x-4 ${isPreview ? 'opacity-50 scale-90' : 'opacity-100 scale-100'}`}
+          style={{ transform: `translateX(${carousel.translateX}px)` }}
+        >
+          {data.map((item, index) => (
+            <motion.div
+              key={`${item.name}-${index}`}
+              className={`p-4 rounded-lg text-center flex-shrink-0 transition-transform ${
+                isPreview ? 'bg-transparent' : 'bg-[#1a1f2e]'
+              } hover:scale-110 hover:opacity-100`}
+              style={{ width: '140px' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 150, damping: 40 }}
+            >
+              <img
+                src={item.logo}
+                height={isPreview ? 50 : 70}
+                width={isPreview ? 100 : 140}
+                alt={item.name}
+                className="mx-auto mb-2"
+              />
+              <p
+                className={`text-sm ${
+                  isPreview ? 'text-gray-400' : 'font-medium text-white'
+                }`}
+              >
+                {item.name}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   return (
     <section className="py-16" id="skills">
       <h2 className="text-3xl font-bold mb-4">Skills</h2>
       <p className="text-gray-400 mb-8">Linguagens e Ferramentas que utilizo no meu dia a dia.</p>
-      <div className="bg-[#242938] rounded-lg overflow-hidden mb-8">
-        {/* Backend/Ferramentas Carrossel */}
-        <div className="flex border-b border-gray-700">
-          <button className={`py-2 px-6 ${activeTab === 'backend' ? 'border-b-2 border-blue-500' : ''}`} onClick={() => setActiveTab('backend')}>Tecnologias</button>
-          <button className={`py-2 px-6 ${activeTab === 'ferramentas' ? 'border-b-2 border-blue-500' : ''}`} onClick={() => setActiveTab('ferramentas')}>Ferramentas</button>
-        </div>
-        <div
-          className="p-6 flex items-center justify-center relative select-none overflow-hidden"
-          onMouseDown={handleDragStart}
-          onMouseUp={(e) => handleDragEnd(e, backendCarousel.handleManualNavigation)}
-          onMouseLeave={() => setIsDragging(false)}
-          onTouchStart={handleDragStart}
-          onTouchEnd={(e) => handleDragEnd(e, backendCarousel.handleManualNavigation)}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Tecnologias e Ferramentas */}
+        <motion.div
+          className="bg-[#242938] rounded-lg p-6 cursor-pointer"
+          onMouseEnter={() => setActivePanel('backend')}
+          onMouseLeave={() => setActivePanel(null)}
+          animate={{ scale: activePanel === 'backend' ? 1.05 : 1 }}
+          transition={{ type: 'spring', stiffness: 150, damping: 20 }}
         >
-          <button
-            className="absolute left-2 bg-gray-700 p-2 rounded-full text-white z-10 hover:bg-gray-600 transition"
-            onClick={() => backendCarousel.handleManualNavigation('prev')}
-          >
-            <img src="https://icongr.am/fontawesome/angle-left.svg?size=128&color=currentColor" alt="Previous" className="w-6 h-6" />
-          </button>
-          <div className="flex items-center space-x-4 overflow-x-clip">
-            {items[activeTab].map((item, index) => {
-              const isCurrent = index === backendIndex;
+          {renderCarousel('backend', activePanel !== 'backend')}
+        </motion.div>
 
-              return (
-                <motion.div
-                  key={item.name}
-                  className={`p-4 rounded-lg text-center flex-shrink-0 transition-transform ${
-                    isCurrent ? 'bg-[#1a1f2e] scale-110 opacity-100' : 'opacity-50 scale-90'
-                  }`}
-                  style={{ width: isCurrent ? '140px' : '100px' }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ type: 'spring', stiffness: 150, damping: 40 }}
-                >
-                  <img src={item.logo} height={isCurrent ? 70 : 50} width={isCurrent ? 140 : 100} alt={item.name} className="mx-auto mb-2" />
-                  <p className={`text-sm ${isCurrent ? 'font-medium text-white' : 'text-gray-400'}`}>{item.name}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-          <button
-            className="absolute right-2 bg-gray-700 p-2 rounded-full text-white z-10 hover:bg-gray-600 transition"
-            onClick={() => backendCarousel.handleManualNavigation('next')}
-          >
-            <img src="https://icongr.am/fontawesome/angle-right.svg?size=128&color=currentColor" alt="Next" className="w-6 h-6" />
-          </button>
-        </div>
-      </div>
-      {/* Basic Skills Carrossel */}
-      <div className="bg-[#242938] rounded-lg overflow-hidden mb-8">
-        <h3 className="text-2xl font-bold mb-4 text-white">Sei o básico</h3>
-        <div
-          className="p-6 flex items-center justify-center relative select-none overflow-hidden"
-          onMouseDown={handleDragStart}
-          onMouseUp={(e) => handleDragEnd(e, basicCarousel.handleManualNavigation)}
-          onMouseLeave={() => setIsDragging(false)}
-          onTouchStart={handleDragStart}
-          onTouchEnd={(e) => handleDragEnd(e, basicCarousel.handleManualNavigation)}
+        {/* Sei o básico */}
+        <motion.div
+          className="bg-[#242938] rounded-lg p-6 cursor-pointer"
+          onMouseEnter={() => setActivePanel('basic')}
+          onMouseLeave={() => setActivePanel(null)}
+          animate={{ scale: activePanel === 'basic' ? 1.05 : 1 }}
+          transition={{ type: 'spring', stiffness: 150, damping: 20 }}
         >
-          <button
-            className="absolute left-2 bg-gray-700 p-2 rounded-full text-white z-10 hover:bg-gray-600 transition"
-            onClick={() => basicCarousel.handleManualNavigation('prev')}
-          >
-            <img src="https://icongr.am/fontawesome/angle-left.svg?size=128&color=currentColor" alt="Previous" className="w-6 h-6" />
-          </button>
-          <div className="flex items-center space-x-4 overflow-x-clip">
-            {basicSkills.map((skill, index) => {
-              const isCurrent = index === basicIndex;
+          {renderCarousel('basic', activePanel !== 'basic')}
+        </motion.div>
 
-              return (
-                <motion.div
-                  key={skill.name}
-                  className={`p-4 rounded-lg text-center flex-shrink-0 transition-transform ${
-                    isCurrent ? 'bg-[#1a1f2e] scale-110 opacity-100' : 'opacity-50 scale-90'
-                  }`}
-                  style={{ width: isCurrent ? '140px' : '100px' }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ type: 'spring', stiffness: 150, damping: 40 }}
-                >
-                  <img src={skill.logo} height={isCurrent ? 70 : 50} width={isCurrent ? 140 : 100} alt={skill.name} className="mx-auto mb-2" />
-                  <p className={`text-sm ${isCurrent ? 'font-medium text-white' : 'text-gray-400'}`}>{skill.name}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-          <button
-            className="absolute right-2 bg-gray-700 p-2 rounded-full text-white z-10 hover:bg-gray-600 transition"
-            onClick={() => basicCarousel.handleManualNavigation('next')}
-          >
-            <img src="https://icongr.am/fontawesome/angle-right.svg?size=128&color=currentColor" alt="Next" className="w-6 h-6" />
-          </button>
-        </div>
-      </div>
-      {/* Learning Skills Carrossel */}
-      <div className="bg-[#242938] rounded-lg overflow-hidden">
-        <h3 className="text-2xl font-bold mb-4 text-white">Quero aprender</h3>
-        <div
-          className="p-6 flex items-center justify-center relative select-none overflow-hidden"
-          onMouseDown={handleDragStart}
-          onMouseUp={(e) => handleDragEnd(e, learningCarousel.handleManualNavigation)}
-          onMouseLeave={() => setIsDragging(false)}
-          onTouchStart={handleDragStart}
-          onTouchEnd={(e) => handleDragEnd(e, learningCarousel.handleManualNavigation)}
+        {/* Quero aprender */}
+        <motion.div
+          className="bg-[#242938] rounded-lg p-6 cursor-pointer"
+          onMouseEnter={() => setActivePanel('learning')}
+          onMouseLeave={() => setActivePanel(null)}
+          animate={{ scale: activePanel === 'learning' ? 1.05 : 1 }}
+          transition={{ type: 'spring', stiffness: 150, damping: 20 }}
         >
-          <button
-            className="absolute left-2 bg-gray-700 p-2 rounded-full text-white z-10 hover:bg-gray-600 transition"
-            onClick={() => learningCarousel.handleManualNavigation('prev')}
-          >
-            <img src="https://icongr.am/fontawesome/angle-left.svg?size=128&color=currentColor" alt="Previous" className="w-6 h-6" />
-          </button>
-          <div className="flex items-center space-x-4 overflow-x-clip">
-            {learningSkills.map((skill, index) => {
-              const isCurrent = index === learningIndex;
-
-              return (
-                <motion.div
-                  key={skill.name}
-                  className={`p-4 rounded-lg text-center flex-shrink-0 transition-transform ${
-                    isCurrent ? 'bg-[#1a1f2e] scale-110 opacity-100' : 'opacity-50 scale-90'
-                  }`}
-                  style={{ width: isCurrent ? '140px' : '100px' }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ type: 'spring', stiffness: 150, damping: 40 }}
-                >
-                  <img src={skill.logo} height={isCurrent ? 70 : 50} width={isCurrent ? 140 : 100} alt={skill.name} className="mx-auto mb-2" />
-                  <p className={`text-sm ${isCurrent ? 'font-medium text-white' : 'text-gray-400'}`}>{skill.name}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-          <button
-            className="absolute right-2 bg-gray-700 p-2 rounded-full text-white z-10 hover:bg-gray-600 transition"
-            onClick={() => learningCarousel.handleManualNavigation('next')}
-          >
-            <img src="https://icongr.am/fontawesome/angle-right.svg?size=128&color=currentColor" alt="Next" className="w-6 h-6" />
-          </button>
-        </div>
+          {renderCarousel('learning', activePanel !== 'learning')}
+        </motion.div>
       </div>
     </section>
   );
