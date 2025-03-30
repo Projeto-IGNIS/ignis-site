@@ -42,7 +42,7 @@ const Hero = () => {
     <section className="py-16 md:py-24 flex flex-col md:flex-row items-center justify-between">
       <div className="md:w-1/2 mb-10 md:mb-0 md:flex md:items-center md:justify-center">
         <div className="md:mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-100 mb-3">
+          <h1 className="text-4xl md:text-5xl font-bold text-blue-300 mb-3">
             Vinicius Dias
           </h1>
           <h2 className="text-xl md:text-2xl font-medium text-blue-400 mb-4">
