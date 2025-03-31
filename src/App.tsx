@@ -15,17 +15,17 @@ export function App() {
 
   return (
     <ThemeProvider>
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <Sidebar
           isVisible={isSidebarVisible}
           onClose={() => setSidebarVisible(false)}
         />
-        <div className={`flex-1 ${isSidebarVisible ? 'ml-64' : ''} transition-all`}>
+        <div className={`flex-1 ${isSidebarVisible ? 'ml-0 md:ml-64' : ''} transition-all`}>
           {/* Botão para abrir a barra lateral */}
           {!isSidebarVisible && (
             <button
               onClick={() => setSidebarVisible(true)}
-              className="fixed top-4 left-4 text-white hover:text-gray-400"
+              className="fixed top-4 left-4 text-white hover:text-gray-400 md:hidden"
               aria-label="Abrir barra lateral"
             >
               <img src="https://img.icons8.com/?size=100&id=ogapbOENSeXT&format=png&color=000000" alt="menu-open" className="w-8 h-8 backdrop-filter backdrop-blur" />

@@ -26,9 +26,10 @@ const Hero = () => {
           <iframe
             title="Spotify Embed"
             src={iframeSrc}
-            width="130%"
-            height="352"
-            style={{border: "0" }}
+            width="100%"
+            height="200"
+            className="md:w-[400px] md:h-[500px]"
+            style={{ border: "0" }}
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             allowFullScreen
             loading="lazy"

@@ -2,7 +2,7 @@ const Works = () => {
   return (
     <section className="py-16" id="works">
       <h2 className="text-3xl font-bold mb-10">Experiências</h2>
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Work Experience Column */}
         <div>
           <h3 className="text-sm text-gray-400 mb-4">Profissionais</h3>

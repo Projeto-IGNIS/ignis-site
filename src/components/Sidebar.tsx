@@ -23,7 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, onClose }) => {
     <aside
       className={`fixed top-0 left-0 h-full w-64 bg-[#1a1f2e] text-white flex flex-col justify-between shadow-lg transform transition-transform ${
         isVisible ? 'translate-x-0' : '-translate-x-full'
-      }`}
+      } md:translate-x-0`}
     >
       {/* Botão para fechar */}
       <button

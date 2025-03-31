@@ -176,7 +176,7 @@ const Skills = () => {
     <section className="py-16" id="skills">
       <h2 className="text-3xl font-bold mb-4">Skills</h2>
       <p className="text-gray-400 mb-8">Linguagens e Ferramentas que utilizo no meu dia a dia.</p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
         {/* Tecnologias e Ferramentas */}
         <motion.div
           className="bg-[#242938] rounded-lg p-6 cursor-pointer"
