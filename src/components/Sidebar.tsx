@@ -28,14 +28,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, onClose }) => {
       {/* Botão para fechar */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-gray-400 hover:text-white"
+        className="absolute top-4 left-4 text-gray-400 hover:text-white"
         aria-label="Fechar barra lateral"
       >
         ✕
       </button>
 
       {/* Navegação */}
-      <nav className="mt-8">
+      <nav className="mt-20">
         <ul className="space-y-4 px-4">
           <li>
             <button
