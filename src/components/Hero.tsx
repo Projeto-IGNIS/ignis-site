@@ -22,11 +22,11 @@ const Hero = () => {
 
       {/* Player do Spotify */}
       <div className="md:w-1/2 mb-10 md:mb-0 md:flex md:items-center md:justify-center">
-        <div className="md:mx-auto">
+        <div className="md:mx-auto w-full">
           <iframe
             title="Spotify Embed"
             src={iframeSrc}
-            width="130%"
+            width="100%"
             height="352"
             style={{border: "0" }}
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
