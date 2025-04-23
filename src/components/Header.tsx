@@ -4,7 +4,7 @@ import { useTheme } from '../context/ThemeContext';
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
   return (
-    <header className="bg-ignis-background text-ignis-text py-4 flex justify-between items-center ">
+    <header className="bg-ignis-background text-ignis-text py-2 sm:py-4 px-4 sm:px-8 flex justify-between items-center">
       <h1 className="text-2xl font-bold text-ignis-primary">Projeto Ignis</h1>
       <div className="flex items-center space-x-4">
         <button

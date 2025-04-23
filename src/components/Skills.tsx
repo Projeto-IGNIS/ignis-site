@@ -180,10 +180,10 @@ const Skills = () => {
       <p className="text-lg text-center text-gray-400 mb-12">
         Linguagens e Ferramentas.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
         {/* Tecnologias e Ferramentas */}
         <motion.div
-          className="bg-gradient-to-r from-orange-200 to-blue-400 rounded-lg p-6 cursor-pointer hover:shadow-xl transition-all"
+          className="bg-gradient-to-r from-orange-200 to-blue-400 rounded-lg p-4 sm:p-6 cursor-pointer hover:shadow-xl transition-all"
           onMouseEnter={() => setActivePanel('backend')}
           onMouseLeave={() => setActivePanel(null)}
           animate={{ scale: activePanel === 'backend' ? 1.05 : 1 }}
@@ -193,7 +193,7 @@ const Skills = () => {
         </motion.div>
         {/* Sei o básico */}
         <motion.div
-          className="bg-gradient-to-r from-orange-200 to-blue-400 rounded-lg p-6 cursor-pointer hover:shadow-xl transition-all"
+          className="bg-gradient-to-r from-orange-200 to-blue-400 rounded-lg p-4 sm:p-6 cursor-pointer hover:shadow-xl transition-all"
           onMouseEnter={() => setActivePanel('basic')}
           onMouseLeave={() => setActivePanel(null)}
           animate={{ scale: activePanel === 'basic' ? 1.05 : 1 }}
@@ -203,7 +203,7 @@ const Skills = () => {
         </motion.div>
         {/* Quero aprender */}
         <motion.div
-          className="bg-gradient-to-r from-orange-200 to-blue-400 rounded-lg p-6 cursor-pointer hover:shadow-xl transition-all"
+          className="bg-gradient-to-r from-orange-200 to-blue-400 rounded-lg p-4 sm:p-6 cursor-pointer hover:shadow-xl transition-all"
           onMouseEnter={() => setActivePanel('learning')}
           onMouseLeave={() => setActivePanel(null)}
           animate={{ scale: activePanel === 'learning' ? 1.05 : 1 }}

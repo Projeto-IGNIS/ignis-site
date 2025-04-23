@@ -5,14 +5,14 @@ const Contact = () => {
       <h2 className="text-4xl font-extrabold mb-12 text-ignis-primary text-center">
         Contato
       </h2>
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
         <a
           href="https://github.com/Projeto-IGNIS"
           target="_blank"
           rel="noopener noreferrer"
           className="block hover:shadow-xl transition-all"
         >
-          <div className="bg-gradient-to-r from-orange-500 to-blue-700 rounded-lg p-6 flex items-center">
+          <div className="bg-gradient-to-r from-orange-500 to-blue-700 rounded-lg p-4 sm:p-6 flex items-center">
             <div className="bg-white p-3 rounded-full mr-4">
               <BsGithub size={28} className="text-blue-700" />
             </div>
@@ -28,7 +28,7 @@ const Contact = () => {
           rel="noopener noreferrer"
           className="block hover:shadow-xl transition-all"
         >
-          <div className="bg-gradient-to-r from-blue-700 to-orange-500 rounded-lg p-6 flex items-center">
+          <div className="bg-gradient-to-r from-blue-700 to-orange-500 rounded-lg p-4 sm:p-6 flex items-center">
             <div className="bg-white p-3 rounded-full mr-4">
               <img src="https://img.icons8.com/?size=100&id=25627&format=png&color=000000" alt="Discord" className="w-8 h-8" />
             </div>

@@ -4,13 +4,13 @@ const Works = () => {
       <h2 className="text-4xl font-extrabold mb-12 text-ignis-primary text-center">
         Experiências
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
         <div>
-          <h3 className="text-lg font-semibold text-ignis-accent mb-6">
+          <h3 className="text-base sm:text-lg font-semibold text-ignis-accent mb-4 sm:mb-6">
             Projetos
           </h3>
-          <div className="space-y-6">
-            <div className="bg-ignis-secondary rounded-lg p-6 flex items-start group hover:shadow-xl transition-all duration-300">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="bg-ignis-secondary rounded-lg p-4 sm:p-6 flex items-start group hover:shadow-xl transition-all duration-300">
               <div className="mr-6">
                 <div className="bg-ignis-accent p-2 rounded transition-transform duration-300 group-hover:scale-110">
                   <img src="https://github.com/Projeto-IGNIS.png" alt="Bracongo" className="w-12 h-8" />
@@ -33,7 +33,7 @@ const Works = () => {
                 <span className="text-xs text-ignis-darkText">1</span>
               </div>
             </div>
-            <div className="bg-ignis-secondary rounded-lg p-6 flex items-start group hover:shadow-xl transition-all duration-300">
+            <div className="bg-ignis-secondary rounded-lg p-4 sm:p-6 flex items-start group hover:shadow-xl transition-all duration-300">
               <div className="mr-6">
                 <div className="bg-ignis-accent p-2 rounded transition-transform duration-300 group-hover:scale-110">
                   <img src="https://github.com/Projeto-IGNIS.png" alt="Boissons" className="w-8 h-8" />
