@@ -1,4 +1,4 @@
-import { LinkedinIcon, MailIcon } from 'lucide-react';
+import {MailIcon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 
 type SidebarProps = {
@@ -9,7 +9,6 @@ type SidebarProps = {
 const Sidebar: React.FC<SidebarProps> = ({ isVisible, onClose }) => {
   const handleNavigation = (id: string) => {
     if (id === '#hero') {
-      // Rola para o topo da página
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       const element = document.querySelector(id);
@@ -21,14 +20,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, onClose }) => {
 
   return (
     <aside
-      className={`fixed top-0 left-0 h-full w-64 bg-[#1a1f2e] text-white flex flex-col justify-between shadow-lg transform transition-transform ${
+      className={`fixed top-0 left-0 h-full w-64 bg-ignis-secondary text-ignis-darkText flex flex-col justify-between shadow-lg transform transition-transform ${
         isVisible ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
       {/* Botão para fechar */}
       <button
         onClick={onClose}
-        className="absolute top-4 left-4 text-gray-400 hover:text-white"
+        className="absolute top-4 left-4 text-ignis-text hover:text-ignis-accent"
         aria-label="Fechar barra lateral"
       >
         ✕
@@ -40,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, onClose }) => {
           <li>
             <button
               onClick={() => handleNavigation('#hero')}
-              className="hover:text-blue-400 transition-colors"
+              className="hover:text-ignis-accent transition-colors"
             >
               Início
             </button>
@@ -48,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, onClose }) => {
           <li>
             <button
               onClick={() => handleNavigation('#works')}
-              className="hover:text-blue-400 transition-colors"
+              className="hover:text-ignis-accent transition-colors"
             >
               Experiências
             </button>
@@ -56,7 +55,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, onClose }) => {
           <li>
             <button
               onClick={() => handleNavigation('#skills')}
-              className="hover:text-blue-400 transition-colors"
+              className="hover:text-ignis-accent transition-colors"
             >
               Skills
             </button>
@@ -64,7 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, onClose }) => {
           <li>
             <button
               onClick={() => handleNavigation('#contact')}
-              className="hover:text-blue-400 transition-colors"
+              className="hover:text-ignis-accent transition-colors"
             >
               Contato
             </button>
@@ -78,19 +77,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, onClose }) => {
         <ul className="space-y-4">
           <li>
             <a
-              href="https://www.linkedin.com/in/vinidias1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 hover:text-blue-400 transition-colors"
-            >
-              <LinkedinIcon size={20} />
-              <span>LinkedIn</span>
-            </a>
-          </li>
-          <li>
-            <a
               href="mailto:viniciusdvalenca@gmail.com"
-              className="flex items-center space-x-2 hover:text-blue-400 transition-colors"
+              className="flex items-center space-x-2 hover:text-ignis-accent transition-colors"
             >
               <MailIcon size={20} />
               <span>Email</span>
@@ -98,10 +86,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible, onClose }) => {
           </li>
           <li>
             <a
-              href="https://github.com/ViniDias1"
+              href="https://github.com/Projeto-IGNIS"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 hover:text-blue-400 transition-colors"
+              className="flex items-center space-x-2 hover:text-ignis-accent transition-colors"
             >
               <SiGithub size={20} />
               <span>GitHub</span>

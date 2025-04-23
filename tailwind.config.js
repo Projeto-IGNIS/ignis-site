@@ -7,11 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        light: {
-          background: '#f9f9f9',
-          text: '#4a4a4a', // Ajustado para um cinza mais escuro
-          primary: '#1d4ed8',
-          secondary: '#9333ea',
+        ignis: {
+          primary: '#FF4500', // Laranja vibrante
+          secondary: '#1E1E1E', // Preto
+          accent: '#FFD700', // Dourado
+          background: '#F5F5F5', // Cinza claro
+          text: '#333333', // Cinza escuro
+          darkText: '#F5F5F5', // Texto claro para fundo escuro
         },
       },
     },

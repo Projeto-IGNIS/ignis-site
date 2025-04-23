@@ -75,7 +75,7 @@ const Skills = () => {
               ? -itemsLength * 150
               : newTranslateX;
           });
-        }, 20); // Adjust speed
+        }, 20);
         return () => clearInterval(interval);
       }
     }, [itemsLength, direction, isDragging]);
@@ -116,9 +116,9 @@ const Skills = () => {
 
     const panelText =
       type === 'backend'
-        ? { title: 'Tecnologias e Ferramentas', description: 'As tecnologias e ferramentas que mais utilizo no meu dia a dia.' }
+        ? { title: 'Tecnologias e Ferramentas', description: 'As tecnologias e ferramentas.' }
         : type === 'basic'
-        ? { title: 'Sei o básico', description: 'Tecnologias que já usei e possuo conhecimento básico.' }
+        ? { title: '', description: 'Tecnologias que já usei e possuo conhecimento básico.' }
         : { title: 'Quero aprender', description: 'Tecnologias que desejo aprender no futuro.' };
 
     return (
@@ -173,13 +173,17 @@ const Skills = () => {
   };
 
   return (
-    <section className="py-16" id="skills">
-      <h2 className="text-3xl font-bold mb-4">Skills</h2>
-      <p className="text-gray-400 mb-8">Linguagens e Ferramentas que utilizo no meu dia a dia.</p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+    <section className="py-20 bg-ignis-background text-ignis-text" id="skills">
+      <h2 className="text-4xl font-extrabold mb-12 text-ignis-primary text-center">
+        Skills
+      </h2>
+      <p className="text-lg text-center text-gray-400 mb-12">
+        Linguagens e Ferramentas.
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Tecnologias e Ferramentas */}
         <motion.div
-          className="bg-[#242938] rounded-lg p-6 cursor-pointer"
+          className="bg-gradient-to-r from-orange-200 to-blue-400 rounded-lg p-6 cursor-pointer hover:shadow-xl transition-all"
           onMouseEnter={() => setActivePanel('backend')}
           onMouseLeave={() => setActivePanel(null)}
           animate={{ scale: activePanel === 'backend' ? 1.05 : 1 }}
@@ -187,10 +191,9 @@ const Skills = () => {
         >
           {renderCarousel('backend', backendCarousel, activePanel !== 'backend')}
         </motion.div>
-
         {/* Sei o básico */}
         <motion.div
-          className="bg-[#242938] rounded-lg p-6 cursor-pointer"
+          className="bg-gradient-to-r from-orange-200 to-blue-400 rounded-lg p-6 cursor-pointer hover:shadow-xl transition-all"
           onMouseEnter={() => setActivePanel('basic')}
           onMouseLeave={() => setActivePanel(null)}
           animate={{ scale: activePanel === 'basic' ? 1.05 : 1 }}
@@ -198,10 +201,9 @@ const Skills = () => {
         >
           {renderCarousel('basic', basicCarousel, activePanel !== 'basic')}
         </motion.div>
-
         {/* Quero aprender */}
         <motion.div
-          className="bg-[#242938] rounded-lg p-6 cursor-pointer"
+          className="bg-gradient-to-r from-orange-200 to-blue-400 rounded-lg p-6 cursor-pointer hover:shadow-xl transition-all"
           onMouseEnter={() => setActivePanel('learning')}
           onMouseLeave={() => setActivePanel(null)}
           animate={{ scale: activePanel === 'learning' ? 1.05 : 1 }}

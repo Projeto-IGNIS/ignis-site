@@ -1,15 +1,15 @@
-import { LinkedinIcon } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import { useTheme } from '../context/ThemeContext';
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
   return (
-    <header className="py-4 flex justify-end">
+    <header className="bg-ignis-background text-ignis-text py-4 flex justify-between items-center ">
+      <h1 className="text-2xl font-bold text-ignis-primary">Projeto Ignis</h1>
       <div className="flex items-center space-x-4">
         <button
           onClick={toggleTheme}
-          className="text-gray-400 hover:text-blue-400 dark:text-gray-600 dark:hover:text-blue-500 transition-colors duration-200"
+          className="text-ignis-text hover:text-ignis-accent transition-colors duration-200"
           aria-label="Toggle Theme"
         >
           {theme === 'dark' ? (
@@ -26,11 +26,8 @@ const Header = () => {
             />
           )}
         </button>
-        <a href="https://www.linkedin.com/in/vinidias1" aria-label="LinkedIn" className="text-gray-400 hover:text-blue-400 dark:text-gray-600 dark:hover:text-blue-500 transition-colors duration-200">
-          <LinkedinIcon size={18} />
-        </a>
-        <a href="https://github.com/ViniDias1" aria-label="GitHub" className="text-gray-400 hover:text-white dark:text-gray-600 dark:hover:text-black transition-colors duration-200">
-          <SiGithub size={18} />
+        <a href="https://github.com/Projeto-IGNIS" aria-label="GitHub" className="text-ignis-text hover:text-ignis-accent transition-colors duration-200">
+          <SiGithub size={28} />
         </a>
       </div>
     </header>
